@@ -2,13 +2,22 @@
 {
   home = {
     packages = with pkgs; [
-      hello
-      cowsay
+      bash
+      tree
+      eza
+      htop
+
+      # Custom packages
+      (callPackage ./pkgs/hms { })
     ];
 
     username = "selubi";
     homeDirectory = "/home/selubi";
 
+
+    # NEVER CHANGE THIS AFTER THE INITIAL INSTALLATION UNLESS YOU KNOW WHAT YOU ARE DOING!
     stateVersion = "26.05";
   };
+
+  programs.home-manager.enable = true;
 }
