@@ -3,11 +3,12 @@
   home = {
     packages = with pkgs; [
       hello
+      cowsay
     ];
 
     username = "selubi";
     homeDirectory = "/home/selubi";
 
-    stateVersion = "23.11";
-  }
+    stateVersion = "26.05";
+  };
 }

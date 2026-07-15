@@ -3,10 +3,10 @@
     description = " My Home Manager configuration";
 
     inputs = {
-        nixpkgs.url = "nixpkgs//nixos-23.11";
+        nixpkgs.url = "nixpkgs/nixpkgs-unstable";
 
         home-manager = {
-            url = "github:nix-community/home-manager/release-23.11";
+            url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
@@ -20,7 +20,7 @@
         };
     in {
         homeConfigurations = {
-            selubi = home-manager.lib.HomeManagerConfiguration {
+            cachyos = home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
                 modules = [
                     ./home.nix
