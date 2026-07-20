@@ -20,14 +20,19 @@
       homeConfigurations = lib.listToAttrs (
         lib.concatLists (
           lib.mapAttrsToList (
-            machineName: machineCfg:
-            lib.forEach machineCfg.users (user: {
-              name = "${user.username}@${machineName}";
+            machineName: machineConfig:
+            lib.forEach machineConfig.users (userConfig: {
+              name = "${userConfig.username}@${machineName}";
               value = home-manager.lib.homeManagerConfiguration {
                 pkgs = import nixpkgs {
-                  inherit (machineCfg) system;
+                  inherit (machineConfig) system;
                 };
-                modules = [ user.homeConfiguration ];
+                modules = [ userConfig.homeConfiguration ];
+                extraSpecialArgs = {
+                  inherit (globalConfig) flakeRef;
+                  inherit userConfig;
+                  inherit machineConfig;
+                };
               };
             })
           ) globalConfig.machines
