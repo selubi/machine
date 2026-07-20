@@ -8,6 +8,8 @@
       htop
       nh
       fish
+      nixfmt
+      nixd
 
       # Custom packages
       (callPackage ./pkgs/hms { })
