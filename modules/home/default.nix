@@ -25,7 +25,6 @@
     nixfmt
     nixd
     zsh
-    uv
     # Custom packages
     # (callPackage ../../pkgs/hms { })
   ];
