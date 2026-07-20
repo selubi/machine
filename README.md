@@ -6,12 +6,45 @@
     ```bash
     curl -fsSL https://install.determinate.systems/nix | sh -s -- install
     ```
-2. Determine which target you want to use, and run below (the example below will use the `selupc` target). This may take a while. 
+2. Determine which target you want to use, and run below (the example below will use the `selubi@selupc` target). This may take a while. 
     ```bash
-    nix run github:nix-community/nh -- home switch github:selubi/machine -c selupc
+    nix run github:nix-community/nh -- home switch github:selubi/machine -c selubi@selupc
     ```
 
 Thats literally it! The only dependency needed here is `curl`, `sh` and internet access.
+
+
+## Available targets
+The available targets are formatted as username@machineName, where machineName represents the attribute keys defined under globalConfig.machines, and username matches the values found within the users list for that specific machine.
+
+Here is an example. If the globalConfig looks like this:
+```nix
+{
+  machines = {
+    selupc = {
+      system = "x86_64-linux";
+      users = [
+        { username = "selubi"; homeConfiguration = ...; }
+        { username = "guest";  homeConfiguration = ...; }
+      ];
+    };
+    selumacbook = {
+      system = "aarch64-darwin";
+      users = [
+        { username = "selubi"; homeConfiguration = ...; }
+      ];
+    };
+  };
+}
+```
+
+Then:
+```
+selubi@selupc
+guest@selupc
+selubi@selumacbook
+```
+are all valid targets.
 
 # References
 Shout out to these resources on helping me build this setup:

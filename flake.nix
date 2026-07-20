@@ -15,19 +15,26 @@
     { nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-      };
+      globalConfig = (lib.evalModules { modules = [ ./globalConfig.nix ]; }).config.globalConfig;
+
+      homeConfigurations = lib.listToAttrs (
+        lib.concatLists (
+          lib.mapAttrsToList (
+            machineName: machineCfg:
+            lib.forEach machineCfg.users (user: {
+              name = "${user.username}@${machineName}";
+              value = home-manager.lib.homeManagerConfiguration {
+                pkgs = import nixpkgs {
+                  inherit (machineCfg) system;
+                };
+                modules = [ user.homeConfiguration ];
+              };
+            })
+          ) globalConfig.machines
+        )
+      );
     in
     {
-      homeConfigurations = {
-        selupc = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./modules/home
-          ];
-        };
-      };
+      inherit homeConfigurations;
     };
 }
