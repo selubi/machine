@@ -22,7 +22,7 @@
     in
     {
       homeConfigurations = {
-        cachyos = home-manager.lib.homeManagerConfiguration {
+        selupc = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./home.nix
