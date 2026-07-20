@@ -12,7 +12,7 @@
       nixd
 
       # Custom packages
-      (callPackage ./pkgs/hms { })
+      (callPackage ../../pkgs/hms { })
     ];
 
     username = "selubi";
