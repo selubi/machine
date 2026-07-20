@@ -8,14 +8,14 @@
     ```
 2. Determine which target you want to use, and run below (the example below will use the `selubi@selupc` target). This may take a while. 
     ```bash
-    nix run github:nix-community/nh -- home switch github:selubi/machine -c selubi@selupc
+    nix run github:nix-community/home-manager -- switch --flake github:selubi/machine#selubi@selupc
     ```
 
 Thats literally it! The only dependency needed here is `curl`, `sh` and internet access.
 
 
 ## Available targets
-The available targets are formatted as username@machineName, where machineName represents the attribute keys defined under globalConfig.machines, and username matches the values found within the users list for that specific machine.
+The available targets are formatted as `userName@machineName`, where `machineName` matches the attribute keys defined under `globalConfig.machines`, and `userName` matches attribute keys of `globalConfig.machines.users`.
 
 Here is an example. If the globalConfig looks like this:
 ```nix
@@ -23,16 +23,12 @@ Here is an example. If the globalConfig looks like this:
   machines = {
     selupc = {
       system = "x86_64-linux";
-      users = [
-        { username = "selubi"; homeConfiguration = ...; }
-        { username = "guest";  homeConfiguration = ...; }
-      ];
+      users.selubi.homeConfiguration = [ ... ];
+      users.guest.homeConfiguration = [ ... ];
     };
     selumacbook = {
       system = "aarch64-darwin";
-      users = [
-        { username = "selubi"; homeConfiguration = ...; }
-      ];
+      users.selubi.homeConfiguration = [ ... ];
     };
   };
 }

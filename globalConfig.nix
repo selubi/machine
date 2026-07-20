@@ -2,19 +2,10 @@
 let
   # Schema for an individual user profile on a machine
   userSubmodule = lib.types.submodule {
-    options = {
-      username = lib.mkOption {
-        type = lib.types.str;
-        description = "The target username on the system.";
-      };
-      homeDirectory = lib.mkOption {
-        type = lib.types.str;
-        description = "The absolute path to the user's home directory (e.g., /home/username).";
-      };
-      homeConfiguration = lib.mkOption {
-        type = lib.types.path;
-        description = "The local directory or file path pointing directly to the Home Manager configuration.";
-      };
+    options.homeConfiguration = lib.mkOption {
+      type = lib.types.listOf lib.types.path;
+      description = "The list of file paths containing the Home Manager configuration.
+      This will directly be passed to the home-manager module as the 'modules' argument.";
     };
   };
 
@@ -26,8 +17,8 @@ let
         description = "The target architecture/OS triplet for this host (e.g., x86_64-linux).";
       };
       users = lib.mkOption {
-        type = lib.types.listOf userSubmodule;
-        default = [ ];
+        type = lib.types.attrsOf userSubmodule;
+        default = { };
         description = "A list of target user profiles provisioned on this specific machine.";
       };
     };
@@ -54,18 +45,7 @@ in
 
     machines.selupc = {
       system = "x86_64-linux";
-      users = [
-        (
-          let
-            username = "selubi";
-          in
-          {
-            inherit username;
-            homeDirectory = "/home/${username}";
-            homeConfiguration = ./modules/home;
-          }
-        )
-      ];
+      users.selubi.homeConfiguration = [ ./modules/home ];
     };
   };
 }

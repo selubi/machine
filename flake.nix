@@ -17,29 +17,49 @@
       lib = nixpkgs.lib;
       globalConfig = (lib.evalModules { modules = [ ./globalConfig.nix ]; }).config.globalConfig;
 
-      homeConfigurations = lib.listToAttrs (
-        lib.concatLists (
-          lib.mapAttrsToList (
-            machineName: machineConfig:
-            lib.forEach machineConfig.users (userConfig: {
-              name = "${userConfig.username}@${machineName}";
-              value = home-manager.lib.homeManagerConfiguration {
-                pkgs = import nixpkgs {
-                  inherit (machineConfig) system;
-                };
-                modules = [ userConfig.homeConfiguration ];
-                extraSpecialArgs = {
-                  inherit (globalConfig) flakeRef;
-                  inherit userConfig;
-                  inherit machineConfig;
-                };
-              };
-            })
-          ) globalConfig.machines
-        )
+      genTarget = { machineName, userName }: "${userName}@${machineName}";
+
+      allTargets = lib.concatLists (
+        lib.mapAttrsToList (
+          machineName: machineConfig:
+          lib.mapAttrsToList (userName: userConfig: {
+            inherit
+              userName
+              userConfig
+              machineName
+              machineConfig
+              ;
+          }) machineConfig.users
+        ) globalConfig.machines
       );
     in
     {
-      inherit homeConfigurations;
+      homeConfigurations = lib.listToAttrs (
+        lib.map (
+          target:
+          let
+            targetName = genTarget { inherit (target) machineName userName; };
+          in
+          {
+            name = targetName;
+            value = home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs { inherit (target.machineConfig) system; };
+              modules = target.userConfig.homeConfiguration;
+              extraSpecialArgs = {
+                nixContext = {
+                  inherit (globalConfig) flakeRef;
+                  inherit targetName;
+                };
+                machineConfig = target.machineConfig // {
+                  machineName = target.machineName;
+                };
+                userConfig = target.userConfig // {
+                  userName = target.userName;
+                };
+              };
+            };
+          }
+        ) allTargets
+      );
     };
 }
