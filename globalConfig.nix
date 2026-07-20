@@ -52,7 +52,7 @@ in
   config.globalConfig = {
     flakeRef = "github:selubi/machine";
 
-    machines.seluPc = {
+    machines.selupc = {
       system = "x86_64-linux";
       users = [
         (

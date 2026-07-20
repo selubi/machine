@@ -1,6 +1,6 @@
 # flake.nix
 {
-  description = " My Home Manager configuration";
+  description = " My machine configurations";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
@@ -22,7 +22,7 @@
     in
     {
       homeConfigurations = {
-        seluPc = home-manager.lib.homeManagerConfiguration {
+        selupc = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./modules/home

@@ -6,9 +6,9 @@
     ```bash
     curl -fsSL https://install.determinate.systems/nix | sh -s -- install
     ```
-2. Determine which target you want to use, and run below (the example below will use the `seluPc` target). This may take a while. 
+2. Determine which target you want to use, and run below (the example below will use the `selupc` target). This may take a while. 
     ```bash
-    nix run github:nix-community/nh -- home switch github:selubi/machine -c seluPc
+    nix run github:nix-community/nh -- home switch github:selubi/machine -c selupc
     ```
 
 Thats literally it! The only dependency needed here is `curl`, `sh` and internet access.

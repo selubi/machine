@@ -13,7 +13,7 @@
             },
             "options": {
                 "home-manager": {
-                    "expr": "(builtins.getFlake \"${workspaceFolder}\").homeConfigurations.seluPc.options",
+                    "expr": "(builtins.getFlake \"${workspaceFolder}\").homeConfigurations.selupc.options",
                 },
             },
         }
