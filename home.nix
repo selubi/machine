@@ -6,6 +6,8 @@
       tree
       eza
       htop
+      nh
+      fish
 
       # Custom packages
       (callPackage ./pkgs/hms { })
