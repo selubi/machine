@@ -2,5 +2,5 @@
 {
   programs.nh.enable = true;
   programs.nh.flake = nixContext.flakeRef;
-  home.shellAliases.nhs = "nh home switch -a -c ${nixContext.targetName}";
+  home.shellAliases.nhs = "nh home switch --refresh -a -c ${nixContext.targetName}";
 }
