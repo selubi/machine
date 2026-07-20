@@ -22,7 +22,7 @@
     in
     {
       homeConfigurations = {
-        selupc = home-manager.lib.homeManagerConfiguration {
+        seluPc = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./modules/home
