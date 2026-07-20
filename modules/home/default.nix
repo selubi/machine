@@ -24,6 +24,7 @@
     htop
     nixfmt
     nixd
+    zsh
 
     # Custom packages
     # (callPackage ../../pkgs/hms { })
