@@ -18,7 +18,6 @@
     username = "selubi";
     homeDirectory = "/home/selubi";
 
-
     # NEVER CHANGE THIS AFTER THE INITIAL INSTALLATION UNLESS YOU KNOW WHAT YOU ARE DOING!
     stateVersion = "26.05";
   };
