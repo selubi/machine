@@ -13,6 +13,12 @@
 
 Thats literally it! The only dependency needed here is `curl`, `sh` and internet access.
 
+## Updating machine to latest config
+The following command will apply the latest configuration on `main` branch of this repo, of the last applied target.
+```bash
+nhs
+```
+This command is defined in [./modules/home/programs/nh.nix](./modules/home/programs/nh.nix)
 
 ## Available targets
 The available targets are formatted as `userName@machineName`, where `machineName` matches the attribute keys defined under `globalConfig.machines`, and `userName` matches attribute keys of `globalConfig.machines.users`.

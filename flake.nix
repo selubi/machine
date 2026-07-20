@@ -1,6 +1,6 @@
 # flake.nix
 {
-  description = " My machine configurations";
+  description = "Selubi's machine configurations";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
@@ -51,10 +51,10 @@
                   inherit targetName;
                 };
                 machineConfig = target.machineConfig // {
-                  machineName = target.machineName;
+                  inherit (target) machineName;
                 };
                 userConfig = target.userConfig // {
-                  userName = target.userName;
+                  inherit (target) userName;
                 };
               };
             };

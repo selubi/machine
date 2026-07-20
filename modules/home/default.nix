@@ -1,26 +1,41 @@
-{ lib, pkgs, ... }:
 {
-  home = {
-    packages = with pkgs; [
-      bash
-      tree
-      eza
-      htop
-      nh
-      fish
-      nixfmt
-      nixd
+  lib,
+  pkgs,
+  nixContext,
+  userConfig,
+  machineConfig,
+  ...
+}:
+{
 
-      # Custom packages
-      (callPackage ../../pkgs/hms { })
-    ];
+  home.username = userConfig.userName;
+  home.homeDirectory =
+    if lib.hasSuffix "darwin" machineConfig.system then
+      "/Users/${userConfig.userName}"
+    else
+      "/home/${userConfig.userName}";
 
-    username = "selubi";
-    homeDirectory = "/home/selubi";
+  imports = [ ./suites/cli.nix ];
 
-    # NEVER CHANGE THIS AFTER THE INITIAL INSTALLATION UNLESS YOU KNOW WHAT YOU ARE DOING!
-    stateVersion = "26.05";
+  home.packages = with pkgs; [
+    bash
+    tree
+    eza
+    htop
+    nixfmt
+    nixd
+
+    # Custom packages
+    # (callPackage ../../pkgs/hms { })
+  ];
+
+  home.sessionVariables = {
+    NXM_FLAKE = nixContext.flakeRef;
+    NXM_TARGET = nixContext.targetName;
+    NXM_SYSTEM = machineConfig.system;
   };
 
-  programs.home-manager.enable = true;
+  # NEVER CHANGE THIS AFTER THE INITIAL INSTALLATION UNLESS YOU KNOW WHAT YOU ARE DOING!
+  # If you ever want to change this, you would need to wipe home manager on every machine and re-install it.
+  home.stateVersion = "26.05";
 }
