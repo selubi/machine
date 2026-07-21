@@ -15,7 +15,7 @@
     { nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
-      globalConfig = (lib.evalModules { modules = [ ./globalConfig.nix ]; }).config.globalConfig;
+      globalConfig = (lib.evalModules { modules = [ ./global-config.nix ]; }).config.globalConfig;
 
       genTarget = { machineName, userName }: "${userName}@${machineName}";
 
