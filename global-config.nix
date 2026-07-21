@@ -16,6 +16,11 @@ let
         type = lib.types.str;
         description = "The target architecture/OS triplet for this host (e.g., x86_64-linux).";
       };
+      isNixOS = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Whether this machine is running NixOS.";
+      };
       users = lib.mkOption {
         type = lib.types.attrsOf userSubmodule;
         default = { };
@@ -45,6 +50,7 @@ in
 
     machines.selupc = {
       system = "x86_64-linux";
+      isNixOS = false;
       users.selubi.homeConfiguration = [ ./modules/home ];
     };
   };
