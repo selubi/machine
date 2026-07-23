@@ -19,7 +19,10 @@
   # If you ever want to change this, you would need to wipe home manager on every machine and re-install it.
   home.stateVersion = "26.05";
 
-  imports = [ ./suites/cli.nix ];
+  imports = [
+    ./suites/cli.nix
+    ./features/machine-update.nix
+  ];
 
   home.packages = with pkgs; [
     bash

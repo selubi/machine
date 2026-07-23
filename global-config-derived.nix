@@ -42,6 +42,7 @@ in
             nixContext = {
               flakeRef = inputGlobalConfig.flakeRef;
               inherit targetName;
+              targetType = "home";
             };
           };
         }
