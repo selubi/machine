@@ -22,6 +22,7 @@
     ./features/machine-update.nix
     ./features/browser.nix
     ./features/pdf.nix
+    ./features/password-manager.nix
   ];
 
   home.packages = with pkgs; [
