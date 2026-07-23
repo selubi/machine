@@ -15,51 +15,22 @@
     { nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
-      globalConfig = (lib.evalModules { modules = [ ./global-config.nix ]; }).config.globalConfig;
-
-      genTarget = { machineName, userName }: "${userName}@${machineName}";
-
-      allTargets = lib.concatLists (
-        lib.mapAttrsToList (
-          machineName: machineConfig:
-          lib.mapAttrsToList (userName: userConfig: {
-            inherit
-              userName
-              userConfig
-              machineName
-              machineConfig
-              ;
-          }) machineConfig.users
-        ) globalConfig.machines
-      );
+      globalConfig = import ./global-config-derived.nix { inherit lib; };
     in
     {
-      homeConfigurations = lib.listToAttrs (
-        lib.map (
-          target:
-          let
-            targetName = genTarget { inherit (target) machineName userName; };
-          in
-          {
-            name = targetName;
-            value = home-manager.lib.homeManagerConfiguration {
-              pkgs = import nixpkgs { inherit (target.machineConfig) system; };
-              modules = target.userConfig.homeConfiguration;
-              extraSpecialArgs = {
-                nixContext = {
-                  inherit (globalConfig) flakeRef;
-                  inherit targetName;
-                };
-                machineConfig = target.machineConfig // {
-                  inherit (target) machineName;
-                };
-                userConfig = target.userConfig // {
-                  inherit (target) userName;
-                };
-              };
-            };
-          }
-        ) allTargets
-      );
+      inherit globalConfig;
+
+      homeConfigurations = lib.mapAttrs (
+        _: targetConfig:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { inherit (targetConfig.machineConfig) system; };
+          modules = targetConfig.userConfig.homeConfiguration;
+          extraSpecialArgs = {
+            inherit (targetConfig) nixContext;
+            inherit (targetConfig) machineConfig;
+            inherit (targetConfig) userConfig;
+          };
+        }
+      ) globalConfig.allHomeManagerTargets;
     };
 }
