@@ -7,5 +7,5 @@
   imports = [ ../programs/nh.nix ];
 
   programs.nh.flake = nixContext.flakeRef;
-  home.shellAliases.nxm = "nh ${nixContext.targetType} switch --refresh -a -c ${nixContext.targetName}";
+  home.shellAliases.nxm = "nh ${nixContext.targetType} switch --refresh -a -b backup -c ${nixContext.targetName}";
 }
