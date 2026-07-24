@@ -1,3 +1,4 @@
+# selubi/default.nix
 { pkgs, ... }:
 {
 
