@@ -3,7 +3,7 @@
 { pkgs, machineConfig, ... }:
 {
   home.packages =
-    if !machineConfig.isNixOS then
+    if machineConfig.isLinux && !machineConfig.isNixOS then
       [
         pkgs._1password-cli
         pkgs._1password-gui
