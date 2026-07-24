@@ -23,6 +23,7 @@
     ./features/browser.nix
     ./features/pdf.nix
     ./features/password-manager.nix
+    ./features/code-editor.nix
   ];
 
   home.packages = with pkgs; [
