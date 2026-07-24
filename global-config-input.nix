@@ -59,7 +59,7 @@ in
     machines.selupc = {
       system = "x86_64-linux";
       isNixOS = false;
-      users.selubi.homeConfiguration = [ ./modules/home ];
+      users.selubi.homeConfiguration = [ ./home/users/selubi ];
     };
   };
 }

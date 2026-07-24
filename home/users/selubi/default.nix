@@ -18,12 +18,12 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    ./suites/cli.nix
-    ./features/machine-update.nix
-    ./features/browser.nix
-    ./features/pdf.nix
-    ./features/password-manager.nix
-    ./features/code-editor.nix
+    ../../suites/cli.nix
+    ../../features/machine-update.nix
+    ../../features/browser.nix
+    ../../features/pdf.nix
+    ../../features/password-manager.nix
+    ../../features/code-editor.nix
   ];
 
   home.packages = with pkgs; [

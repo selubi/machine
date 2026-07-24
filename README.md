@@ -14,9 +14,9 @@
 Thats literally it! The only dependency needed here is `curl`, `sh` and internet access.
 
 ## Updating machine to latest config
-Any machine bootstrapped from this repo will have the `nhs` command available. Running it will automatically pull the latest configuration from the main branch of this repository for the current target and apply it:
+Any machine bootstrapped from this repo will have the `nxm` command available. Running it will automatically pull the latest configuration from the main branch of this repository for the current target and apply it:
 ```bash
-nhs
+nxm
 ```
 This command is defined in [./modules/home/programs/nh.nix](./modules/home/programs/nh.nix).
 
@@ -49,6 +49,13 @@ guest@selupc
 selubi@selumacbook
 ```
 are all valid targets.
+
+# Things to explore
+- devshells
+- Managing secrets
+- flake-parts
+- google drive via rclone
+- nixos
 
 # References
 Shout out to these resources on helping me build this setup:
