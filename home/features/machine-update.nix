@@ -4,7 +4,7 @@
 # You can change the flakeRef easily. For example `nxm .` will use the flake.nix at cwd.
 { nixContext, ... }:
 {
-  imports = [ ../programs/nh.nix ];
+  imports = [ ../modules/nh.nix ];
 
   programs.nh.flake = nixContext.flakeRef;
   home.shellAliases.nxm = "nh ${nixContext.targetType} switch --refresh -a -b backup -c ${nixContext.targetName}";

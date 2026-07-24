@@ -2,8 +2,8 @@
 { ... }:
 {
   imports = [
-    ../programs/google-chrome.nix
-    ./default-applications.nix
+    ../modules/google-chrome.nix
+    ../modules/default-applications.nix
   ];
 
   xdg.mimeApps.defaultApplications = {

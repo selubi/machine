@@ -2,7 +2,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./default-applications.nix
+    ../modules/default-applications.nix
   ];
 
   home.packages = [

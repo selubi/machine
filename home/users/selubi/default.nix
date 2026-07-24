@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   nixContext,
   userConfig,
@@ -18,7 +17,7 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    ../../suites/cli.nix
+    ../../features/cli.nix
     ../../features/machine-update.nix
     ../../features/browser.nix
     ../../features/pdf.nix

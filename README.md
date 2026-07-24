@@ -18,7 +18,7 @@ Any machine bootstrapped from this repo will have the `nxm` command available. R
 ```bash
 nxm
 ```
-This command is defined in [./modules/home/programs/nh.nix](./modules/home/programs/nh.nix).
+This command is defined in [./modules/home/modules/nh.nix](./modules/home/modules/nh.nix).
 
 The current target can also be checked via `NXM_TARGET` environment variable.
 
