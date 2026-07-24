@@ -33,6 +33,7 @@
     nixfmt
     nixd
     zsh
+    nil
     # Custom packages
     # (callPackage ../../pkgs/hms { })
   ];
