@@ -1,5 +1,5 @@
 # vscode.nix
-{ ... }: {
+{ pkgs, ... }: {
   programs.vscode = {
     enable = true;
 
@@ -12,10 +12,16 @@
     profiles.default = {
       userSettings = {
         "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
+        "workbench.iconTheme" = "material-icon-theme";
         "git.confirmSync" = false;
         "explorer.confirmDragAndDrop" = false;
         "explorer.confirmDelete" = false;
       };
+      extensions = with pkgs.vscode-marketplace; [
+        monokai.theme-monokai-pro-vscode
+        jnoortheen.nix-ide
+        pkief.material-icon-theme
+      ];
     };
   };
 }
