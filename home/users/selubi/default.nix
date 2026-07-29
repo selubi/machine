@@ -10,6 +10,7 @@
     ../../features/pdf.nix
     ../../features/password-manager.nix
     ../../features/code-editor.nix
+    ../../features/fonts.nix
   ];
 
   home.packages = with pkgs; [

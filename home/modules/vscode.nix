@@ -14,6 +14,10 @@
       userSettings = {
         "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
         "workbench.iconTheme" = "material-icon-theme";
+        "editor.formatOnSave" = true;
+        "editor.mouseWheelZoom" = true;
+        "editor.fontFamily" = "'FiraCode Nerd Font Mono', monospace";
+        "editor.fontLigatures" = true;
         "git.confirmSync" = false;
         "explorer.confirmDragAndDrop" = false;
         "explorer.confirmDelete" = false;
