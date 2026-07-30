@@ -11,6 +11,7 @@
     ../../features/password-manager.nix
     ../../features/code-editor.nix
     ../../features/fonts.nix
+    ../../features/japanese-input.nix
   ];
 
   home.packages = with pkgs; [
@@ -22,6 +23,7 @@
     nixd
     zsh
     nil
+    wev
     # Custom packages
     # (callPackage ../../pkgs/hms { })
   ];
