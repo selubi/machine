@@ -1,8 +1,0 @@
-default partial alphanumeric_keys 
-xkb_symbols "eisu_shifted_capslock" {
-    key <CAPS> {
-        type[Group1] = "TWO_LEVEL",
-        symbols[Group1] = [ Escape, Caps_Lock ],
-        actions[Group1] = [ NoAction(), LockMods(modifiers = Lock) ]
-    };
-};
