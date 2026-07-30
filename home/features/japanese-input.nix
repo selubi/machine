@@ -16,7 +16,6 @@
 
       # This surpresses some warning about env vars
       # In a normal system you would read https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland
-      waylandFrontend = true;
 
       addons = with pkgs; [
         # Matches https://archlinux.org/groups/x86_64/fcitx5-im/
