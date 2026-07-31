@@ -5,6 +5,9 @@
   # Basically we control all application looks here.
   # Compared to defining the themes at each app, this will make things easier to cleanup.
 
+  # Possibly needs relogin / restart after changing stuffs here.
+  # (Especially when changing things that is related to the system, e.g. cursor, fcitx5)
+
   catppuccin = {
     enable = true;
     autoEnable = true;
