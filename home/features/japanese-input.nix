@@ -1,6 +1,8 @@
 # japanese-input.nix
 { pkgs, ... }: {
 
+  # Possibly needs relogin / restart after changing stuffs here.
+
   # The goal:
   # Caps Lock -> Toggle between english input (raw keyboard input) and japanese input (mozc hiragana mode)
   # Shift + Caps Lock -> The original functionality of Caps Lock
