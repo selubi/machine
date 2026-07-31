@@ -12,6 +12,7 @@
     ../../features/code-editor.nix
     ../../features/fonts.nix
     ../../features/japanese-input.nix
+    ../../features/theme.nix
   ];
 
   home.packages = with pkgs; [

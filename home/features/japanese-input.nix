@@ -1,6 +1,9 @@
 # japanese-input.nix
 { pkgs, ... }: {
 
+  #####################################
+  # Input Method Layer
+  #####################################
   # Resources
   # https://wiki.nixos.org/wiki/Fcitx5
   # https://wiki.archlinux.org/title/Localization/Japanese
@@ -13,7 +16,6 @@
     enable = true;
     type = "fcitx5";
     fcitx5 = {
-
       # This surpresses some warning about env vars
       # In a normal system you would read https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland
       waylandFrontend = true;
@@ -26,6 +28,17 @@
         # Japanese input method with UT dictionary
         fcitx5-mozc-ut
       ];
+    };
+
+    fcitx5.settings.inputMethod = {
+      GroupOrder."0" = "Default";
+      "Groups/0" = {
+        Name = "Default";
+        "Default Layout" = "us";
+        DefaultIM = "keyboard-us";
+      };
+      "Groups/0/Items/0".Name = "keyboard-us";
+      "Groups/0/Items/1".Name = "mozc";
     };
   };
 

@@ -12,8 +12,6 @@
 
     profiles.default = {
       userSettings = {
-        "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
-        "workbench.iconTheme" = "material-icon-theme";
         "editor.formatOnSave" = true;
         "editor.mouseWheelZoom" = true;
         "editor.fontFamily" = "'FiraCode Nerd Font Mono', monospace";
@@ -23,10 +21,10 @@
         "explorer.confirmDelete" = false;
       };
       extensions = with pkgs.vscode-marketplace; [
-        monokai.theme-monokai-pro-vscode
         jnoortheen.nix-ide
-        pkief.material-icon-theme
       ];
     };
+
+    # Manage theme at color-theme.nix
   };
 }

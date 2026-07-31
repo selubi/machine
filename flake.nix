@@ -12,6 +12,9 @@
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+
+    # How the hell does a color pallete has its own nix module
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -19,6 +22,7 @@
       nixpkgs,
       home-manager,
       nix-vscode-extensions,
+      catppuccin,
       ...
     }:
     let
@@ -37,7 +41,7 @@
               nix-vscode-extensions.overlays.default
             ];
           };
-          modules = targetConfig.userConfig.homeConfiguration;
+          modules = targetConfig.userConfig.homeConfiguration ++ [ catppuccin.homeModules.catppuccin ];
           extraSpecialArgs = {
             inherit (targetConfig) nixContext;
             inherit (targetConfig) machineConfig;
