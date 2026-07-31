@@ -2,7 +2,7 @@
 # This file transforms the global-config-input.nix into something processable by the flake.nix.
 # Its all processing, no manual inputs here.
 # Inspect the end result with `nix eval --json .#globalConfig`, its easier to see the result first then try to understand the code.
-{ lib, ... }:
+{ lib, flake, ... }:
 let
   inputGlobalConfig =
     (lib.evalModules { modules = [ ./global-config-input.nix ]; }).config.inputGlobalConfig;
@@ -41,6 +41,7 @@ in
 
             nixContext = {
               flakeRef = inputGlobalConfig.flakeRef;
+              sha = flake.rev or flake.dirtyRev;
               inherit targetName;
               targetType = "home";
             };

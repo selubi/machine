@@ -18,6 +18,7 @@
   # Needs relogin after changing
   home.sessionVariables = {
     NXM_FLAKE = nixContext.flakeRef;
+    NXM_SHA = nixContext.sha;
     NXM_TARGET = nixContext.targetName;
     NXM_SYSTEM = machineConfig.system;
   };

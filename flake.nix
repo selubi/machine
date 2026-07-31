@@ -19,6 +19,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       nix-vscode-extensions,
@@ -27,7 +28,10 @@
     }:
     let
       lib = nixpkgs.lib;
-      globalConfig = import ./global-config-derived.nix { inherit lib; };
+      globalConfig = import ./global-config-derived.nix {
+        inherit lib;
+        flake = self;
+      };
     in
     {
       inherit globalConfig;
