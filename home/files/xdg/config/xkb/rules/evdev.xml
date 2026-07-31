@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xkbConfigRegistry SYSTEM "xkb.dtd">
+<xkbConfigRegistry version="1.1">
+  <optionList>
+    <group allowMultipleSelection="true">
+      <configItem>
+        <name>selubi</name>
+        <description>Selubi's custom options</description>
+      </configItem>
+      <option>
+        <configItem>
+          <name>selubi:hztg_shifted_capslock</name>
+          <description>Caps Locks acts as Zenkaku Hankaku, but Shift + Caps Lock is the regular Caps Lock</description>
+        </configItem>
+      </option>
+    </group>
+  </optionList>
+</xkbConfigRegistry>

@@ -1,0 +1,4 @@
+! option = symbols
+  selubi:hztg_shifted_capslock = +selubi(hztg_shifted_capslock)
+
+! include %S/evdev

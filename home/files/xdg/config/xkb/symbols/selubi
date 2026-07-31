@@ -1,0 +1,8 @@
+partial modifier_keys
+xkb_symbols "hztg_shifted_capslock" {
+    replace key <CAPS> {
+        type[Group1] = "TWO_LEVEL",
+        symbols[Group1] = [ Zenkaku_Hankaku, Caps_Lock ],
+        actions[Group1] = [ NoAction(), LockMods(modifiers = Lock) ]
+    };
+};

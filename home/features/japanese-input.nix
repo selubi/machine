@@ -1,11 +1,27 @@
 # japanese-input.nix
 { pkgs, ... }: {
 
+  # The goal:
+  # Caps Lock -> Toggle between english input (raw keyboard input) and japanese input (mozc hiragana mode)
+  # Shift + Caps Lock -> The original functionality of Caps Lock
+  #####################################
+  # Keyboard layout layer
+  #####################################
+
+  xdg.configFile."xkb" = {
+    source = ../files/xdg/config/xkb;
+    recursive = true;
+  };
+
+  # There is still two things needed in keyboard layout layer
+  # 1. use fcitx5 as default virtual keyboard (/home/selubi/.config/kwinrc)
+  # 2. specify to use the options (~/.config/kxkbrc)
+
   #####################################
   # Input Method Layer
   #####################################
   # Resources
-  # https://wiki.nixos.org/wiki/Fcitx5
+  # https://wiki.nixos.org/wikni/Fcitx5
   # https://wiki.archlinux.org/title/Localization/Japanese
   # https://wiki.archlinux.org/title/Mozc
   # https://wiki.archlinux.org/title/Fcitx5
