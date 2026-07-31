@@ -1,4 +1,0 @@
-! option = symbols
-  custom:eisu_shifted_capslock = +custom(eisu_shifted_capslock)
-
-! include %S/evdev
