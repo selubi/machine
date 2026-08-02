@@ -1,6 +1,7 @@
 # home/features/theme.nix
 { options, lib, ... }:
 {
+  # Guard, don't crash if catppuccin is not available
   config = lib.optionalAttrs (options ? catppuccin) {
     # https://nix.catppuccin.com/
     # Basically we control all application looks here.
