@@ -15,15 +15,15 @@
 
     # How the hell does a color pallete has its own nix module
     catppuccin.url = "github:catppuccin/nix";
+
+    _1password-shell-plugins.url = "github:1Password/shell-plugins";
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       home-manager,
-      nix-vscode-extensions,
-      catppuccin,
       ...
     }:
     let
@@ -42,11 +42,12 @@
           pkgs = import nixpkgs {
             inherit (targetConfig.machineConfig) system;
             overlays = [
-              nix-vscode-extensions.overlays.default
+              inputs.nix-vscode-extensions.overlays.default
             ];
           };
           modules = targetConfig.userConfig.homeConfiguration ++ [
-            catppuccin.homeModules.catppuccin
+            inputs.catppuccin.homeModules.catppuccin
+            inputs._1password-shell-plugins.hmModules.default
           ];
           extraSpecialArgs = {
             inherit (targetConfig) nixContext;
