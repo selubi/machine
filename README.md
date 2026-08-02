@@ -70,6 +70,7 @@ are all valid targets.
 - flake-parts
 - google drive via rclone
 - nixos
+  - 1password system auth & shell integration
 
 ## References
 
