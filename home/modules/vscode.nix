@@ -10,6 +10,8 @@
     # Keep this true for sanity, or you need to change nix settings everytime installing an extension
     mutableExtensionsDir = true;
 
+    # Themes are managed centrally at home/features/theme.nix.
+
     profiles.default = {
       userSettings = {
         "editor.formatOnSave" = true;
@@ -19,12 +21,29 @@
         "git.confirmSync" = false;
         "explorer.confirmDragAndDrop" = false;
         "explorer.confirmDelete" = false;
+
+        # nix
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
+        "nix.serverSettings" = {
+          nil = {
+            formatting = {
+              command = [ "nixfmt" ];
+            };
+          };
+          nixd = {
+            formatting = {
+              command = [ "nixfmt" ];
+            };
+          };
+        };
       };
+
       extensions = with pkgs.vscode-marketplace; [
+        # nix
         jnoortheen.nix-ide
       ];
     };
 
-    # Manage theme at color-theme.nix
   };
 }
