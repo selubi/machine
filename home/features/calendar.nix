@@ -21,7 +21,7 @@ in
       genericName = "Calendar";
       # Now we use the fully configured binary!
       exec = "${chromeBinary} --app=https://calendar.google.com";
-      icon = "google-calendar";
+      icon = "google-agenda"; # The icon in papirus is called "google-agenda"
       terminal = false;
       type = "Application";
       categories = [
