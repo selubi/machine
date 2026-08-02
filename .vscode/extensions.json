@@ -1,6 +1,7 @@
 // .vscode/extensions.json
 {
     "recommendations": [
-        "jnoortheen.nix-ide"
+        "jnoortheen.nix-ide",
+        "davidanson.vscode-markdownlint"
     ]
 }

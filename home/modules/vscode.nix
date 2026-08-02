@@ -42,6 +42,9 @@
       extensions = with pkgs.vscode-marketplace; [
         # nix
         jnoortheen.nix-ide
+
+        # markdown
+        davidanson.vscode-markdownlint
       ];
     };
 
