@@ -10,4 +10,9 @@
     ../modules/nh.nix
     ../modules/btop.nix
   ];
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings.default = [ "com.mitchellh.ghostty.desktop" ];
+  };
 }

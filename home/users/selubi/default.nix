@@ -14,6 +14,7 @@
     ../../features/japanese-input.nix
     ../../features/theme.nix
     ../../features/vcs.nix
+    ../../features/multimedia.nix
   ];
 
   home.packages = with pkgs; [
