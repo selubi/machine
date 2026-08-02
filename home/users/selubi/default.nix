@@ -16,6 +16,8 @@
     ../../features/vcs.nix
     ../../features/multimedia.nix
     ../../features/gui.nix
+    ../../features/calendar.nix
+    ../../features/mail.nix
   ];
 
   home.packages = with pkgs; [
