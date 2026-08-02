@@ -15,6 +15,7 @@
     ../../features/theme.nix
     ../../features/vcs.nix
     ../../features/multimedia.nix
+    ../../features/gui.nix
   ];
 
   home.packages = with pkgs; [

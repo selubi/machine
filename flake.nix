@@ -10,8 +10,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # How the hell does a color pallete has its own nix module
     catppuccin.url = "github:catppuccin/nix";
@@ -46,6 +54,7 @@
             ];
           };
           modules = targetConfig.userConfig.homeConfiguration ++ [
+            inputs.plasma-manager.homeModules.plasma-manager
             inputs.catppuccin.homeModules.catppuccin
             inputs._1password-shell-plugins.hmModules.default
           ];
