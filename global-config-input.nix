@@ -24,7 +24,6 @@ let
         type = lib.types.enum [
           "x86_64-linux"
           "aarch64-linux"
-          "x86_64-darwin"
           "aarch64-darwin"
         ];
         description = "The target system architecture for this machine. e.g., x86_64-linux, aarch64-darwin, etc.";
