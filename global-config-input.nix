@@ -11,6 +11,10 @@ let
       description = "The list of file paths containing the Home Manager configuration.
       This will directly be passed to the home-manager module as the 'modules' argument.";
     };
+    options.userEmail = lib.mkOption {
+      type = lib.types.str;
+      description = "The email address for the user.";
+    };
   };
 
   # Schema for a machine configuration, which can contain multiple user profiles
@@ -60,7 +64,10 @@ in
     machines.selupc = {
       system = "x86_64-linux";
       isNixOS = false;
-      users.selubi.homeConfiguration = [ ./home/users/selubi ];
+      users.selubi = {
+        userEmail = "gregorius.bryan@selubi.tech";
+        homeConfiguration = [ ./home/users/selubi ];
+      };
     };
   };
 }

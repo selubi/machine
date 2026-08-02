@@ -13,6 +13,7 @@
     ../../features/fonts.nix
     ../../features/japanese-input.nix
     ../../features/theme.nix
+    ../../features/vcs.nix
   ];
 
   home.packages = with pkgs; [
