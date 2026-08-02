@@ -45,7 +45,9 @@
               nix-vscode-extensions.overlays.default
             ];
           };
-          modules = targetConfig.userConfig.homeConfiguration ++ [ catppuccin.homeModules.catppuccin ];
+          modules = targetConfig.userConfig.homeConfiguration ++ [
+            catppuccin.homeModules.catppuccin
+          ];
           extraSpecialArgs = {
             inherit (targetConfig) nixContext;
             inherit (targetConfig) machineConfig;
