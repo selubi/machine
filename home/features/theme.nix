@@ -1,4 +1,4 @@
-# features/theme.nix
+# home/features/theme.nix
 { options, lib, ... }:
 {
   config = lib.optionalAttrs (options ? catppuccin) {

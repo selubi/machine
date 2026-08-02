@@ -1,4 +1,5 @@
 # global-config-input.nix
+
 # Schemas and actual configuration input.
 # config.inputGlobalConfig is intended to be manually edited. Put your machine and user configurations here.
 { lib, ... }:

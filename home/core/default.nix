@@ -1,4 +1,4 @@
-# core/default.nix
+# home/core/default.nix
 {
   nixContext,
   userConfig,

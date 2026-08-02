@@ -1,4 +1,4 @@
-# vscode.nix
+# home/modules/vscode.nix
 { pkgs, ... }: {
   programs.vscode = {
     enable = true;

@@ -1,3 +1,4 @@
+# home/modules/nh.nix
 { ... }:
 {
   programs.nh.enable = true;

@@ -1,3 +1,4 @@
+// .vscode/settings.json
 {
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nil",

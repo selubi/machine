@@ -1,4 +1,4 @@
-# pdf.nix
+# home/features/pdf.nix
 { pkgs, ... }:
 {
   imports = [

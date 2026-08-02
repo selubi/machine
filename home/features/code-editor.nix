@@ -1,4 +1,4 @@
-# code-editor.nix
+# home/features/code-editor.nix
 { ... }: {
   imports = [ ../modules/vscode.nix ];
 }

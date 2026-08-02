@@ -1,3 +1,4 @@
+# pkgs/hms/default.nix
 {
   writeShellApplication,
   dix,

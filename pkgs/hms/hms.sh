@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# pkgs/hms/hms.sh
 set -euo pipefail
 
 TARGET="${1:-}"

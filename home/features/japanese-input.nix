@@ -1,4 +1,4 @@
-# japanese-input.nix
+# home/features/japanese-input.nix
 { pkgs, ... }: {
 
   # Possibly needs relogin / restart after changing stuffs here.

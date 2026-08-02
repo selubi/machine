@@ -1,3 +1,4 @@
+# home/features/cli.nix
 { ... }:
 {
   imports = [

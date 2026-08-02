@@ -1,4 +1,4 @@
-# selubi/default.nix
+# home/users/selubi/default.nix
 { pkgs, ... }:
 {
 

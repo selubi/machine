@@ -1,4 +1,4 @@
-# browser.nix
+# home/features/browser.nix
 { ... }:
 {
   imports = [

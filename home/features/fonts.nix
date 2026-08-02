@@ -1,4 +1,4 @@
-# fonts.nix
+# home/features/fonts.nix
 { pkgs, ... }: {
   fonts.fontconfig.enable = true;
 

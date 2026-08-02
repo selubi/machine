@@ -1,4 +1,5 @@
 # global-config-derived.nix
+
 # This file transforms the global-config-input.nix into something processable by the flake.nix.
 # Its all processing, no manual inputs here.
 # Inspect the end result with `nix eval --json .#globalConfig`, its easier to see the result first then try to understand the code.
