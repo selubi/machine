@@ -115,12 +115,6 @@
     # In a normal linux system, this would live in ~/.config/kxkbrc
     (lib.optionalAttrs (options ? programs.plasma) {
       programs.plasma = {
-        # The xkb files above only *define* the option. Plasma still has to be told
-        # to load it, and it keeps that in ~/.config/kxkbrc.
-        #
-        # `options` also writes ResetOldOptions=true, i.e. our list is the complete
-        # set of xkb options; anything previously clicked together in System
-        # Settings -> Keyboard is dropped. That is the point: one source of truth.
         input.keyboard = {
           layouts = [ { layout = "us"; } ];
           options = [ "selubi:hztg_shifted_capslock" ];
@@ -128,23 +122,34 @@
       };
     })
 
-    # This is a no-op in plasma, but putting it here seems to have no harm.
-    {
-      home.keyboard = {
-        layout = "us";
-        options = [ "selubi:hztg_shifted_capslock" ];
-      };
-    }
-
     # Second, we need to let the window manager know to use the fcitx input method.
     # For KDE Plasma 6, this is the configuration.
     # In a normal linux system, this would live in ~/.config/kwinrc
     # Or, in a normal KDE Plasma 6 GUI, this is System Settings -> Keyboard -> Virtual Keyboard
+    # For other compositors, check https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland
+
+    # What we hand kwin is a path to fcitx5's .desktop file. There are three ways to write
+    # that path and they are not equal, so please don't "simplify" this one back:
+
+    # 1. The nix store path, /nix/store/<hash>-fcitx5-with-addons-<ver>/share/applications/...
+    #    Works fine, but the hash changes every time fcitx5 updates, so kwinrc gets rewritten
+    #    on every single update. Pure noise.
+    # 2. A literal "$HOME/.nix-profile/share/applications/...", which is what the KDE GUI writes.
+    #    This needs the [$e] marker so KDE expands the variable itself, and it assumes your
+    #    profile always sits at ~/.nix-profile. That is not true on NixOS or with nix.useXdg.
+    # 3. config.home.profileDirectory, what we actually use.
+    #    Home manager works out the correct profile for us: ~/.nix-profile on a normal linux
+    #    system, /etc/profiles/per-user/<you> if this ever becomes a NixOS module, or
+    #    $XDG_STATE_HOME/nix/profile when nix.useXdg is on. It is already an absolute path,
+    #    so we don't need [$e] at all.
+
+    # And we can trust the file is really there. i18n.inputMethod above puts fcitx5 into
+    # home.packages, and home.packages is what fills the profile. Same file, same feature,
+    # so the setting and the desktop file cannot drift apart.
     (lib.optionalAttrs (options ? programs.plasma) {
       programs.plasma = {
         configFile.kwinrc.Wayland.InputMethod = "${config.home.profileDirectory}/share/applications/org.fcitx.Fcitx5.desktop";
       };
     })
   ];
-
 }
