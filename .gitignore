@@ -12,3 +12,8 @@ result-*
 
 # Local folder for experimentation.
 local
+
+# Ignore per-machine Claude Code state, but keep shared project config
+# (.claude/settings.json, agents, commands, skills) tracked.
+.claude/settings.local.json
+.claude/*.tmp.*

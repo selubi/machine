@@ -18,6 +18,7 @@
     ../../features/gui.nix
     ../../features/calendar.nix
     ../../features/mail.nix
+    ../../features/ai.nix
   ];
 
   home.packages = with pkgs; [

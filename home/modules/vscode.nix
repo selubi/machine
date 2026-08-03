@@ -40,6 +40,9 @@
       };
 
       extensions = with pkgs.vscode-marketplace; [
+        # claude
+        anthropic.claude-code
+
         # nix
         jnoortheen.nix-ide
 
