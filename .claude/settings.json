@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(git rebase*)",
+      "Bash(git stash drop*)",
+      "Bash(nh home switch*)",
+      "Bash(nh os switch*)",
+      "Bash(nxm*)",
+      "Bash(hms*)",
+      "Bash(home-manager switch*)",
+      "Bash(nixos-rebuild*)",
+      "Bash(sudo *)"
+    ],
+    "allow": [
+      "Read",
+      "Bash(nix eval *)",
+      "Bash(nix build *)",
+      "Bash(nix flake *)",
+      "Bash(nix repl *)",
+      "Bash(nixfmt *)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add *)"
+    ]
+  }
+}

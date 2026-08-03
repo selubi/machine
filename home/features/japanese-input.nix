@@ -13,6 +13,12 @@
   # The goal:
   # Caps Lock -> Toggle between english input (raw keyboard input) and japanese input (mozc hiragana mode)
   # Shift + Caps Lock -> The original functionality of Caps Lock
+  # Do this all in user space
+
+  # This is so we can use the standard ANSI (English) keyboard layout with glorious 2U Backspace and 6.25U Spacebar
+  # And still have a way to input Japanese.
+
+  # Sounds easy right? **famous last words**
 
   imports = [
     ../modules/plasma.nix
