@@ -95,7 +95,8 @@
           ];
         };
 
-        # Here we configure the multiple input methods within fcitx5, and their keybindings.
+        # Here we configure the multiple input methods within fcitx5.
+        # ~/.config/fcitx5/profile
         fcitx5.settings.inputMethod = {
           GroupOrder."0" = "Default";
           "Groups/0" = {
