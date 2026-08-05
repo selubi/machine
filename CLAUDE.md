@@ -4,6 +4,12 @@
 User-facing usage lives in [README.md](./README.md). This file is the stuff that is
 not obvious from reading the code, plus the traps that have already bitten.
 
+**Keep this file current.** Agents should update it as they go — new traps, new
+conventions, corrections to things written here that turned out wrong — without waiting
+to be asked. Same for anything you learn about how selubi likes to work (comment style,
+what to verify vs. assert, how much to ask before acting): if it'll matter to the next
+agent working in this repo, write it down here, not just in your own memory.
+
 ## What this is
 
 Standalone (not NixOS-module) home-manager flake, currently applied to CachyOS with
@@ -36,6 +42,9 @@ another feature to have imported it.
   `/usr/share/X11/xkb/rules/base.lst`). Prose is plain and conversational, uses "we",
   and prefers a numbered list of rejected alternatives over a dense clause. When a
   decision looks arbitrary but isn't, say "don't simplify this back" and give the reason.
+  State the settled conclusion, not the investigation that got you there — no "confirmed
+  by running X", no "I initially assumed Y which was wrong". `home/features/japanese-input.nix`
+  is the reference for the target density; keep new comments closer to that than not.
 - `home.stateVersion = "26.05"` in `home/core/default.nix` — never change it.
 
 ### Guard options that come from flake inputs
@@ -55,6 +64,17 @@ attrs before the module system sees them. See `home/features/theme.nix`,
 
 Cost of the guard: silent degradation. Say so in a comment where it matters.
 
+### Cross-feature defaults: `options.defaultX.{package,desktopId}`
+
+When a feature picks a concrete app for a role (`browser.nix` → Chrome, `code-editor.nix`
+→ VSCode, `terminal-emulator.nix` → ghostty), it exposes a small `readOnly` option pair
+— `defaultBrowser.package`/`.desktopId`, `defaultEditor.*`, `defaultTerminal.*` — instead
+of having every other feature that needs "the browser"/"the editor" read
+`config.programs.<specific-app>.*` directly. Consumers (`mail.nix`, `calendar.nix`,
+`gui.nix`) import the feature that owns the option and read it, same as any other
+"feature owns its own dependency" import. Swapping the underlying app later only means
+changing the one file that sets the option.
+
 ### Let apps own their own state
 
 Deliberate stance, applied consistently:
@@ -66,7 +86,42 @@ Deliberate stance, applied consistently:
 Same price both times: **deleting a setting from this repo leaves the key behind.** Nix
 stops asserting it, nix does not clean it up. Remove orphans by hand.
 
+**`programs.plasma.panels` is the deliberate exception.** Setting it at all makes
+plasma-manager take full ownership of panels — see the Trap below. `home/features/gui.nix`
+opts into this on purpose to get a reproducible dock/top-bar layout; everywhere else in
+this repo, panels/desktop state is still left alone.
+
 ## Traps
+
+### `programs.plasma.panels` replaces panels wholesale, not merges
+
+Its layout script opens with `panels().forEach(panel => panel.remove())`, then recreates
+only what's declared in nix. Any panel/widget you add live in the GUI after this is set
+gets destroyed on the next apply — this is the one place plasma-manager does not merge
+into existing KDE state. See `home/features/gui.nix`.
+
+### KDE has two separate "default application" mechanisms
+
+System Settings → Default Applications looks like one thing but isn't. Browser/Terminal
+resolve through legacy singular keys in `kdeglobals` (`BrowserApplication=`,
+`TerminalApplication=`) — confirmed live, but not read or written by the current
+`kcm_componentchooser.so` (grepped it directly, neither string appears). Email/Calendar/
+TextEditor/FileManager resolve through plain XDG mimetype associations
+(`xdg.mimeApps.defaultApplications`) instead — `text/calendar`, `x-scheme-handler/mailto`,
+etc. Don't assume one mechanism covers all four categories just because the KCM shows
+them on the same page. `home/features/gui.nix` sets the two kdeglobals keys directly;
+`browser.nix`/`mail.nix`/`calendar.nix`/`code-editor.nix` set mimeapps.
+
+### A `.desktop` file id is not always unambiguous, and don't derive it via `readDir`
+
+Multiple features expose `options.defaultX.desktopId` (`browser.nix`, `code-editor.nix`,
+`terminal-emulator.nix`) as a plain hardcoded string rather than reading it off the
+package (`builtins.readDir "${pkg}/share/applications"`). Two reasons: that needs the
+package already built at *eval* time (an import-from-derivation, slow and a Nix flakes
+anti-pattern), and it isn't even always unambiguous — `google-chrome`'s package ships
+*two* `.desktop` files (`com.google.Chrome.desktop` and `google-chrome.desktop`), so
+"the" filename depends on which one the rest of the config already assumes. Verify once
+by hand instead: `ls $(nix eval --raw '.#homeConfigurations."selubi@selupc".config.programs.<x>.package')/share/applications`.
 
 ### A changed generation hash does not mean a changed config
 
@@ -126,6 +181,22 @@ output against copies of the live ones rather than guessing. Get `data.json` fro
 temp dir, run plasma-manager's `script/write_config.py` there, and `diff` against
 `~/.config/*`. This caught that only one line of `kwinrc` changes and the HDR/tiling keys
 survive.
+
+**What will `programs.plasma.panels`/`configFile` actually write?** `nix build` prints the
+derivations it's building — find the one for the panel layout script or `data.json`, then
+resolve and read it directly:
+
+```bash
+nix build --no-link --print-out-paths '.#homeConfigurations."selubi@selupc".activationPackage'
+# copy the relevant .drv path from the build output, then:
+P=$(nix-store -q --outputs <path>.drv | head -1)
+grep 'writeConfig("launchers"' "$P"   # or whatever key you're checking
+```
+
+This is how the dock launcher list, the per-sensor colors, and the `kdeglobals`
+`BrowserApplication`/`TerminalApplication` values all got confirmed in this repo —
+cheaper than applying and checking live, and catches nix-level mistakes (wrong widget
+name, wrong option shape) before they ever reach `nxm`.
 
 **Is it live, not just on disk?** KDE reads most of this at session start. For input
 methods: `ps -eo pid,ppid,comm | grep fcitx5` — its parent should be `kwin_wayland`, which

@@ -25,7 +25,8 @@
       "Bash(git status*)",
       "Bash(git diff*)",
       "Bash(git log*)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(pacman -Q*)"
     ]
   }
 }
