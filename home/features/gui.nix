@@ -120,21 +120,6 @@
 
             { panelSpacer.expanding = true; }
 
-            # Shows just the active app's name, not the full window title.
-            # plasma-manager packages this plasmoid itself and adds it to
-            # home.packages automatically -- no KDE Store install needed.
-            {
-              applicationTitleBar = {
-                layout = {
-                  elements = [ "windowTitle" ];
-                  horizontalAlignment = "center";
-                };
-                windowTitle.source = "appName";
-              };
-            }
-
-            { panelSpacer.expanding = true; }
-
             # Per-core CPU bar chart. Raw name+config instead of the typed
             # `systemMonitor` widget: that helper always emits plugin
             # "org.kde.plasma.systemmonitor", but this is the dedicated
