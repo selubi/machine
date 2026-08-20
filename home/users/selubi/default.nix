@@ -8,7 +8,7 @@
     ../../features/machine-update.nix
     ../../features/browser.nix
     ../../features/pdf.nix
-    ../../features/password-manager.nix
+    # ../../features/password-manager.nix
     ../../features/code-editor.nix
     ../../features/fonts.nix
     ../../features/japanese-input.nix
