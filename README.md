@@ -72,6 +72,14 @@ are all valid targets.
 - nixos
   - 1password system auth & shell integration
 
+## Command cheat sheet
+
+Update flake and switch to the new system
+
+```bash
+nxm -u
+```
+
 ## References
 
 Shout out to these resources on helping me build this setup:
