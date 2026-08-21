@@ -6,5 +6,6 @@
     ../modules/home-manager.nix
     ../modules/nh.nix
     ../modules/btop.nix
+    ../modules/direnv.nix
   ];
 }
