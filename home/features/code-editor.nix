@@ -21,6 +21,7 @@
   config = {
     home.sessionVariables = {
       VISUAL = "code --wait";
+      EDITOR = "code --wait";
     };
 
     xdg.mimeApps.defaultApplications = {
