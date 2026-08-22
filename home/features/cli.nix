@@ -8,5 +8,6 @@
     ../modules/btop.nix
     ../modules/direnv.nix
     ../modules/devenv.nix
+    ../modules/starship.nix
   ];
 }
