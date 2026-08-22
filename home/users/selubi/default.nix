@@ -31,7 +31,6 @@
     zsh
     nil
     wev
-    devenv
     # minikube
     # Custom packages
     # (callPackage ../../pkgs/hms { })

@@ -21,22 +21,6 @@
         "git.confirmSync" = false;
         "explorer.confirmDragAndDrop" = false;
         "explorer.confirmDelete" = false;
-
-        # nix
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nil";
-        "nix.serverSettings" = {
-          nil = {
-            formatting = {
-              command = [ "nixfmt" ];
-            };
-          };
-          nixd = {
-            formatting = {
-              command = [ "nixfmt" ];
-            };
-          };
-        };
       };
 
       extensions = with pkgs.vscode-marketplace; [

@@ -7,5 +7,6 @@
     ../modules/nh.nix
     ../modules/btop.nix
     ../modules/direnv.nix
+    ../modules/devenv.nix
   ];
 }
