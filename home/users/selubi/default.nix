@@ -31,6 +31,7 @@
     zsh
     nil
     wev
+    yubikey-manager
     # minikube
     # Custom packages
     # (callPackage ../../pkgs/hms { })
